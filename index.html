@@ -1,17 +1,18 @@
+```html
 <!DOCTYPE html>
 <html lang="ko" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🌴 인생 2막 노후설계소 | 안석훈 KB스타웰스매니저</title>
-  <meta name="description" content="세금과 건보료까지 고려한 완벽한 실시간 노후자금 계산기. 부족한 자금을 파악하고, 달러 비과세 맞춤 솔루션을 제안합니다." />
+  <meta name="description" content="30초 무료 노후진단과 실시간 노후자금 계산기로 부족한 자금을 파악하고, 달러 비과세 저축보험까지 맞춤 솔루션을 제안합니다." />
   <meta name="theme-color" content="#FF6B6B" />
-
+  
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-
+  
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -22,7 +23,6 @@
             primary: '#FF6B6B',
             secondary: '#4ECDC4',
             dark: '#2D3436',
-            kbblue: '#FFD700', // KB accent
           },
           fontFamily: {
             sans: ['"Noto Sans KR"', 'sans-serif'],
@@ -32,28 +32,11 @@
       }
     }
   </script>
-
+  
   <!-- Custom CSS -->
   <style>
     body { font-family: 'Noto Sans KR', sans-serif; }
     .font-display { font-family: 'Jua', sans-serif; }
-    
-    /* 입력창 숫자 스피너(화살표) 숨김 및 단위 텍스트 겹침 방지 */
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    input[type="number"] {
-      -moz-appearance: textfield;
-    }
-    .input-group .relative input {
-      padding-right: 4rem !important; /* '만원' 텍스트와 겹치지 않도록 우측 여백 확보 */
-    }
-    .input-group .relative span {
-      top: 50% !important;
-      transform: translateY(-50%);
-    }
     
     /* Range Slider Styling */
     input[type=range] {
@@ -79,57 +62,29 @@
       border-radius: 4px;
     }
     
+    /* 숫자 입력창 화살표 숨기기 */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield; /* Firefox */
+    }
+    
     /* Floating Button Animation */
     @keyframes bounce-slow {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
     .float-btn { animation: bounce-slow 3s infinite; }
-
-    /* Custom Scrollbar for results */
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 10px;
-    }
-
-    .input-group label {
-      display: block;
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: #374151;
-      margin-bottom: 0.5rem;
-    }
-    .input-group input, .input-group select {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border-radius: 0.75rem;
-      border: 1px solid #e5e7eb;
-      background-color: #f9fafb;
-      transition: all 0.2s;
-      outline: none;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-    .input-group input:focus, .input-group select:focus {
-      --tw-ring-color: #FF6B6B;
-      --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-      --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-      border-color: transparent;
-    }
   </style>
 </head>
 <body class="text-gray-800 antialiased bg-gray-50">
 
+  <!-- 네비게이션 -->
   <nav class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm" id="navbar">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         <div class="flex-shrink-0 flex items-center">
           <a href="#" class="font-display text-2xl text-primary flex items-center gap-2">
@@ -137,15 +92,18 @@
           </a>
         </div>
         
+        <!-- Desktop Menu -->
         <div class="hidden md:flex items-center space-x-8">
           <a href="#diagnosis" class="text-gray-600 hover:text-primary font-medium transition">무료 진단</a>
-          <a href="#calculator" class="text-primary font-bold transition">세후 노후자금 계산기</a>
+          <a href="#calculator" class="text-gray-600 hover:text-primary font-medium transition">정밀 계산기</a>
           <a href="#solution" class="text-gray-600 hover:text-primary font-medium transition">맞춤솔루션</a>
           <a href="#cta" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold hover:bg-red-500 transition shadow-md hover:shadow-lg flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
             상담예약
           </a>
         </div>
 
+        <!-- Mobile Menu Button -->
         <div class="md:hidden flex items-center">
           <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary focus:outline-none">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -156,405 +114,373 @@
       </div>
     </div>
     
+    <!-- Mobile Menu -->
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="#calculator" class="block px-3 py-3 rounded-md text-base font-bold text-primary bg-red-50">정밀 노후자금 계산기</a>
+        <a href="#diagnosis" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">무료 진단</a>
+        <a href="#calculator" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">정밀 계산기</a>
         <a href="#solution" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">맞춤솔루션</a>
+        <a href="#cta" class="block px-3 py-3 rounded-md text-base font-medium text-primary bg-red-50">상담예약</a>
       </div>
     </div>
   </nav>
 
-  <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-orange-50 -z-10"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+  <!-- Hero 섹션 -->
+  <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-red-50 to-orange-50 -z-10"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
       <div class="flex justify-center gap-3 mb-6 flex-wrap">
         <span class="px-4 py-1.5 rounded-full bg-white shadow-sm border border-gray-100 text-sm font-bold text-gray-600">🏆 KB스타웰스매니저</span>
         <span class="px-4 py-1.5 rounded-full bg-white shadow-sm border border-gray-100 text-sm font-bold text-gray-600">💎 MDRT 17년 연속</span>
       </div>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight mb-6 tracking-tight">
-        숨만 쉬어도 나가는 건보료·세금 폭탄?! 💣<br>
-        <span class="text-primary relative inline-block">
-          진짜 내 통장에 꽂히는 실수령 연금
+      
+      <h1 class="text-4xl md:text-5xl lg:text-7xl font-black text-gray-900 leading-tight mb-6 tracking-tight break-keep">
+        세금·건보료 떼고,<br>
+        <span class="text-primary relative inline-block mt-2">
+          진짜 내 연금
           <svg class="absolute w-full h-3 -bottom-1 left-0 text-yellow-300 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none"/></svg>
-        </span> 은 얼마일까?
+        </span>은 얼마일까요?
       </h1>
-      <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-        연금, 모으는 것보다 <strong>어떻게 받느냐</strong>가 중요합니다.<br class="hidden sm:block">
-        복잡한 사적연금 분리과세, 공적연금 건강보험료 차감까지 완벽하게 반영된<br>
-        <strong>국내 최고 수준의 프리미엄 노후 진단</strong>을 지금 무료로 경험해보세요.
+      
+      <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-2xl mx-auto break-keep">
+        막연한 노후 걱정은 그만! 숨만 쉬어도 나가는 세금까지 완벽히 계산된 진짜 은퇴 플랜을 확인하세요.
       </p>
       
-      <div class="flex justify-center gap-4">
-        <a href="#calculator" class="bg-dark text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-black transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center gap-2">
-          📊 정밀 계산기 시작하기
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#calculator" class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-red-500 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+          실수령액 바로 계산하기 →
         </a>
       </div>
     </div>
   </section>
 
-  <section id="calculator" class="py-16 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- 무료진단 섹션 -->
+  <section id="diagnosis" class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4 font-display">세후(Net) 실수령 노후자금 계산기</h2>
-        <p class="text-lg text-gray-600">공적연금 건보료 부과 및 사적연금 세율(16.5% 경고 포함)이 모두 반영된 정밀 시뮬레이션입니다.</p>
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4 font-display">무료 노후진단</h2>
+        <p class="text-lg text-gray-600">간단한 질문 5개로 당신의 노후 준비 상태를 진단해드립니다.</p>
       </div>
       
-      <!-- 계산기 메인 컨테이너 -->
-      <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-gray-200">
-        
-        <!-- 입력 패널 (좌측/상단) -->
-        <div class="lg:w-3/5 p-6 md:p-10 bg-white overflow-y-auto max-h-[850px] custom-scrollbar">
-          
-          <div id="error-message" class="hidden mb-6 p-4 bg-red-100 text-red-700 rounded-xl font-bold border border-red-200"></div>
-
-          <form id="calc-form" onsubmit="event.preventDefault(); calculateRetirement();" class="space-y-8">
-            
-            <!-- 1. 기본 정보 & 목표 -->
-            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-              <h3 class="text-lg font-black text-dark mb-4 flex items-center gap-2">
-                <span class="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span> 
-                기본 정보 및 목표
-              </h3>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div class="input-group">
-                  <label>현재 나이 (세)</label>
-                  <input type="number" id="currentAge" value="45" min="20" max="70" required>
-                </div>
-                <div class="input-group">
-                  <label>은퇴 희망 나이 (세)</label>
-                  <input type="number" id="retireAge" value="65" min="50" max="85" required>
-                </div>
-                <div class="input-group">
-                  <label>기대 수명 (세)</label>
-                  <input type="number" id="lifeExpectancy" value="90" min="70" max="120" required>
-                </div>
-                <div class="input-group">
-                  <label>은퇴 후 필요 월 생활비 (현재가치, 만원)</label>
-                  <div class="relative">
-                    <input type="number" id="monthlyNeed" value="300" min="100" step="10" required class="text-right pr-12">
-                    <span class="absolute right-4 top-3 text-gray-500">만원</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 2. 공적연금 -->
-            <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
-              <div class="flex justify-between items-start mb-4">
-                <h3 class="text-lg font-black text-blue-900 flex items-center gap-2">
-                  <span class="bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span> 
-                  공적연금 (건보료 산정 대상)
-                </h3>
-                <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded font-bold">건보료 소득 50% 반영</span>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div class="input-group">
-                  <label>공적연금 종류</label>
-                  <select id="publicPensionType">
-                    <option value="national">국민연금</option>
-                    <option value="civil">공무원연금 (행정, 경찰 등)</option>
-                    <option value="military">군인연금</option>
-                    <option value="teacher">사학연금</option>
-                    <option value="special">특수직역 (검사, 판사 등)</option>
-                  </select>
-                </div>
-                <div class="input-group">
-                  <label>예상 월 수령액 (현재가치, 만원)</label>
-                  <div class="relative">
-                    <input type="number" id="publicPensionAmount" value="100" min="0" step="10" class="text-right pr-12">
-                    <span class="absolute right-4 top-3 text-gray-500">만원</span>
-                  </div>
-                  <p class="text-xs text-gray-500 mt-1">국민연금관리공단 등에서 조회된 예상액</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- 3. 사적연금 (세제적격) -->
-            <div class="bg-purple-50/50 p-6 rounded-2xl border border-purple-100">
-              <div class="flex justify-between items-start mb-4">
-                <h3 class="text-lg font-black text-purple-900 flex items-center gap-2">
-                  <span class="bg-purple-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">3</span> 
-                  사적연금 & 퇴직연금 (분리과세 대상)
-                </h3>
-                <span class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded font-bold">수령나이별 3.3~5.5% 저율과세</span>
-              </div>
-              <div class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div class="input-group">
-                    <label>IRP (개인형 퇴직연금) 현재 잔액</label>
-                    <div class="relative">
-                      <input type="number" id="irpAsset" value="1000" min="0" step="100" class="text-right pr-12">
-                      <span class="absolute right-4 top-3 text-gray-500">만원</span>
-                    </div>
-                  </div>
-                  <div class="input-group">
-                    <label>IRP 매월 추가 납입액</label>
-                    <div class="relative">
-                      <input type="number" id="irpMonthly" value="30" min="0" step="5" class="text-right pr-12">
-                      <span class="absolute right-4 top-3 text-gray-500">만원</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
-                  <div class="input-group">
-                    <label>연금저축(펀드/보험) 현재 잔액</label>
-                    <div class="relative">
-                      <input type="number" id="savingsAsset" value="2000" min="0" step="100" class="text-right pr-12">
-                      <span class="absolute right-4 top-3 text-gray-500">만원</span>
-                    </div>
-                  </div>
-                  <div class="input-group">
-                    <label>연금저축 매월 추가 납입액</label>
-                    <div class="relative">
-                      <input type="number" id="savingsMonthly" value="30" min="0" step="5" class="text-right pr-12">
-                      <span class="absolute right-4 top-3 text-gray-500">만원</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="input-group pt-2 border-t border-purple-100">
-                  <label>퇴직연금(DC/DB) 예상 총 수령액 (은퇴 시점)</label>
-                  <div class="relative">
-                    <input type="number" id="retirementPay" value="10000" min="0" step="500" class="text-right pr-12">
-                    <span class="absolute right-4 top-3 text-gray-500">만원</span>
-                  </div>
-                  <p class="text-xs text-gray-500 mt-1">*퇴직금을 IRP로 이전하여 연금으로 수령한다고 가정합니다.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- 4. 비과세 및 일반자산 -->
-            <div class="bg-green-50/50 p-6 rounded-2xl border border-green-100">
-              <div class="flex justify-between items-start mb-4">
-                <h3 class="text-lg font-black text-green-900 flex items-center gap-2">
-                  <span class="bg-green-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">4</span> 
-                  비과세 연금 & 일반 자산
-                </h3>
-                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-bold">세금 0원 / 건보료 제외</span>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div class="input-group">
-                  <label>달러비과세/저축보험 현재 잔액</label>
-                  <div class="relative">
-                    <input type="number" id="taxfreeAsset" value="0" min="0" step="100" class="text-right pr-12">
-                    <span class="absolute right-4 top-3 text-gray-500">만원</span>
-                  </div>
-                </div>
-                <div class="input-group">
-                  <label>비과세 매월 추가 납입액</label>
-                  <div class="relative">
-                    <input type="number" id="taxfreeMonthly" value="0" min="0" step="10" class="text-right pr-12">
-                    <span class="absolute right-4 top-3 text-gray-500">만원</span>
-                  </div>
-                </div>
-                <div class="input-group md:col-span-2">
-                  <label>기타 일반 금융자산 (예적금/주식 등)</label>
-                  <div class="relative">
-                    <input type="number" id="generalAsset" value="3000" min="0" step="100" class="text-right pr-12">
-                    <span class="absolute right-4 top-3 text-gray-500">만원</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 5. 환경 설정 (수익률/물가) -->
-            <div class="p-6 rounded-2xl border border-gray-200">
-              <h3 class="text-lg font-black text-dark mb-4 flex items-center gap-2">
-                <span class="bg-gray-700 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">5</span> 
-                수익률 & 물가상승률
-              </h3>
-              <div class="space-y-6">
-                <div>
-                  <div class="flex justify-between mb-2">
-                    <label class="text-sm font-bold text-gray-700">사적연금/투자자산 기대 연 수익률</label>
-                    <span class="font-bold text-primary"><span id="val-investReturn">5.0</span>%</span>
-                  </div>
-                  <input type="range" id="investReturn" min="1" max="12" step="0.5" value="5.0" oninput="document.getElementById('val-investReturn').innerText = this.value">
-                </div>
-                <div>
-                  <div class="flex justify-between mb-2">
-                    <label class="text-sm font-bold text-gray-700">안전자산(일반) 기대 연 수익률</label>
-                    <span class="font-bold text-secondary"><span id="val-safeReturn">3.0</span>%</span>
-                  </div>
-                  <input type="range" id="safeReturn" min="1" max="5" step="0.5" value="3.0" oninput="document.getElementById('val-safeReturn').innerText = this.value">
-                </div>
-                <div>
-                  <div class="flex justify-between mb-2">
-                    <label class="text-sm font-bold text-gray-700">연평균 물가상승률</label>
-                    <span class="font-bold text-orange-500"><span id="val-inflation">2.5</span>%</span>
-                  </div>
-                  <input type="range" id="inflationRate" min="1" max="5" step="0.1" value="2.5" oninput="document.getElementById('val-inflation').innerText = this.value">
-                </div>
-              </div>
-            </div>
-
-            <button type="submit" class="w-full bg-primary text-white py-5 rounded-2xl font-black text-xl hover:bg-red-600 transition shadow-[0_10px_20px_rgba(255,107,107,0.3)] hover:shadow-[0_15px_30px_rgba(255,107,107,0.4)] transform hover:-translate-y-1">
-              세후 실수령 연금액 분석하기
-            </button>
-          </form>
+      <div class="bg-gray-50 p-8 rounded-3xl shadow-inner border border-gray-100" id="quiz-container">
+        <!-- 퀴즈 문항 1 -->
+        <div class="quiz-step active" id="step-1">
+          <p class="text-sm font-bold text-primary mb-2">질문 1 / 5</p>
+          <h3 class="text-2xl font-bold text-gray-800 mb-6 break-keep">현재 매월 저축이나 투자를 규칙적으로 하고 계신가요?</h3>
+          <div class="space-y-3">
+            <button onclick="nextQuiz(1, 10)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">네, 꾸준히 하고 있습니다.</button>
+            <button onclick="nextQuiz(1, 5)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">가끔 여유가 될 때만 합니다.</button>
+            <button onclick="nextQuiz(1, 0)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">아니요, 현재 여력이 없습니다.</button>
+          </div>
         </div>
 
-        <!-- 결과 패널 (우측) -->
-        <div class="lg:w-2/5 bg-dark p-6 md:p-8 text-white relative flex flex-col max-h-[850px] overflow-y-auto custom-scrollbar">
+        <!-- 퀴즈 문항 2 -->
+        <div class="quiz-step hidden" id="step-2">
+          <p class="text-sm font-bold text-primary mb-2">질문 2 / 5</p>
+          <h3 class="text-2xl font-bold text-gray-800 mb-6 break-keep">은퇴 후 필요할 것으로 예상되는 '월 생활비'를 정확히 계산해 본 적이 있나요?</h3>
+          <div class="space-y-3">
+            <button onclick="nextQuiz(2, 10)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">네, 구체적인 금액을 알고 있습니다.</button>
+            <button onclick="nextQuiz(2, 5)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">대략적인 감은 잡고 있습니다.</button>
+            <button onclick="nextQuiz(2, 0)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">아니요, 생각해 본 적 없습니다.</button>
+          </div>
+        </div>
+
+        <!-- 퀴즈 문항 3 -->
+        <div class="quiz-step hidden" id="step-3">
+          <p class="text-sm font-bold text-primary mb-2">질문 3 / 5</p>
+          <h3 class="text-2xl font-bold text-gray-800 mb-6 break-keep">물가 상승을 방어할 수 있는 '비과세/달러 자산'을 보유하고 계신가요?</h3>
+          <div class="space-y-3">
+            <button onclick="nextQuiz(3, 10)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">네, 충분히 준비되어 있습니다.</button>
+            <button onclick="nextQuiz(3, 5)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">일부 있지만 부족한 것 같습니다.</button>
+            <button onclick="nextQuiz(3, 0)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">아니요, 전혀 준비되어 있지 않습니다.</button>
+          </div>
+        </div>
+
+        <!-- 퀴즈 문항 4 -->
+        <div class="quiz-step hidden" id="step-4">
+          <p class="text-sm font-bold text-primary mb-2">질문 4 / 5</p>
+          <h3 class="text-2xl font-bold text-gray-800 mb-6 break-keep">공적연금(국민연금 등) 및 퇴직연금으로 매월 얼마를 받을 수 있는지 아시나요?</h3>
+          <div class="space-y-3">
+            <button onclick="nextQuiz(4, 10)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">네, 예상 수령액을 확인해 보았습니다.</button>
+            <button onclick="nextQuiz(4, 5)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">대략적인 금액만 짐작하고 있습니다.</button>
+            <button onclick="nextQuiz(4, 0)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">아니요, 아직 확인해 본 적이 없습니다.</button>
+          </div>
+        </div>
+
+        <!-- 퀴즈 문항 5 -->
+        <div class="quiz-step hidden" id="step-5">
+          <p class="text-sm font-bold text-primary mb-2">질문 5 / 5</p>
+          <h3 class="text-2xl font-bold text-gray-800 mb-6 break-keep">은퇴 후 발생할 수 있는 '의료비'나 '긴급 자금'에 대한 대비책이 있나요?</h3>
+          <div class="space-y-3">
+            <button onclick="finishQuiz(5, 10)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">네, 별도의 예비 자금이나 보험이 충분합니다.</button>
+            <button onclick="finishQuiz(5, 5)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">일부 대비는 했으나, 큰 지출에는 부족할 수 있습니다.</button>
+            <button onclick="finishQuiz(5, 0)" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-primary hover:bg-red-50 transition font-medium text-lg">아니요, 아직 별도로 대비하지 못했습니다.</button>
+          </div>
+        </div>
+
+        <!-- 퀴즈 결과 -->
+        <div class="quiz-step hidden text-center py-6" id="quiz-result">
+          <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-4xl">📊</span>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">진단 완료!</h3>
+          <p id="result-text" class="text-xl text-primary font-bold mb-6"></p>
+          <p class="text-gray-600 mb-8 max-w-md mx-auto break-keep">숨은 세금과 건보료까지 반영된 정확한 실수령액은 아래 계산기를 통해 직접 확인해보세요.</p>
+          <a href="#calculator" class="bg-gray-800 text-white px-8 py-3 rounded-full font-bold hover:bg-gray-700 transition inline-block">계산기로 이동하기 ↓</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 노후자금 정밀 계산기 -->
+  <section id="calculator" class="py-20 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4 font-display">은퇴 후 실수령액 정밀 계산기</h2>
+        <p class="text-lg text-gray-600 break-keep">세금(3.3~16.5%)과 건강보험료까지 모두 차감된 '진짜 내 돈'을 확인하세요.</p>
+      </div>
+      
+      <div class="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col lg:flex-row">
+        
+        <!-- 입력 폼 -->
+        <div class="p-6 lg:p-8 lg:w-1/2 bg-white max-h-[800px] overflow-y-auto">
+          <div class="space-y-6">
+            
+            <!-- 기본 정보 -->
+            <div class="pb-4 border-b border-gray-100">
+              <h4 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="text-xl">👤</span> 기본 정보</h4>
+              <!-- sm 화면 이하에서 1줄로 표시되도록 그리드 변경 -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition overflow-hidden">
+                  <span class="pl-4 text-gray-700 font-bold whitespace-nowrap">현재 나이</span>
+                  <input type="number" id="currentAge" value="45" min="20" max="70" class="w-full px-4 py-3 bg-transparent outline-none text-lg font-semibold text-right">
+                  <span class="pr-4 text-gray-500 font-medium whitespace-nowrap">세</span>
+                </div>
+                <div class="flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition overflow-hidden">
+                  <span class="pl-4 text-gray-700 font-bold whitespace-nowrap">은퇴 나이</span>
+                  <input type="number" id="retireAge" value="65" min="50" max="80" class="w-full px-4 py-3 bg-transparent outline-none text-lg font-semibold text-right">
+                  <span class="pr-4 text-gray-500 font-medium whitespace-nowrap">세</span>
+                </div>
+                <div class="flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition overflow-hidden">
+                  <span class="pl-4 text-gray-700 font-bold whitespace-nowrap">기대 수명</span>
+                  <input type="number" id="lifeExpectancy" value="90" min="70" max="120" class="w-full px-4 py-3 bg-transparent outline-none text-lg font-semibold text-right">
+                  <span class="pr-4 text-gray-500 font-medium whitespace-nowrap">세</span>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <label class="block text-sm font-bold text-gray-700 mb-2 break-keep">희망 월 생활비 <span class="text-gray-400 font-normal">(현재가치 기준)</span></label>
+                <div class="flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition overflow-hidden">
+                  <input type="number" id="monthlyNeed" value="300" min="100" step="10" class="w-full pl-4 pr-2 py-3 bg-transparent outline-none text-lg font-semibold text-right">
+                  <span class="pr-4 text-gray-500 font-medium whitespace-nowrap">만원</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 연금 자산 정보 -->
+            <div class="pb-4 border-b border-gray-100">
+              <h4 class="font-bold text-primary mb-4 flex items-center gap-2"><span class="text-xl">💰</span> 연금 자산 현황</h4>
+              
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-sm font-bold text-gray-700 mb-1 break-keep">공적연금 (국민/공무원 등) 예상수령액</label>
+                  <p class="text-xs text-gray-500 mb-2">은퇴 시점부터 받을 월 예상 금액을 입력하세요.</p>
+                  <div class="flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition overflow-hidden">
+                    <input type="number" id="publicPension" value="120" min="0" step="10" class="w-full pl-4 pr-2 py-3 bg-transparent outline-none text-lg font-semibold text-right text-blue-700">
+                    <span class="pr-4 text-gray-500 font-medium whitespace-nowrap">만원/월</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-bold text-gray-700 mb-1 break-keep">사적연금 (IRP + 연금저축) 현재 적립액</label>
+                  <p class="text-xs text-gray-500 mb-2">수령 시 3.3~5.5% 저율과세 (연 1,500만원 초과시 16.5%)</p>
+                  <div class="flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition overflow-hidden">
+                    <input type="number" id="privatePension" value="3000" min="0" step="100" class="w-full pl-4 pr-2 py-3 bg-transparent outline-none text-lg font-semibold text-right">
+                    <span class="pr-4 text-gray-500 font-medium whitespace-nowrap">만원</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-bold text-gray-700 mb-1 break-keep">퇴직연금 (DC/DB) 현재 적립액</label>
+                  <div class="flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition overflow-hidden">
+                    <input type="number" id="severance" value="5000" min="0" step="100" class="w-full pl-4 pr-2 py-3 bg-transparent outline-none text-lg font-semibold text-right">
+                    <span class="pr-4 text-gray-500 font-medium whitespace-nowrap">만원</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-bold text-gray-700 mb-1 break-keep">비과세연금 (달러보험 등) 현재 적립액</label>
+                  <p class="text-xs text-gray-500 mb-2 text-green-600">세금 및 건보료 산정에서 완전 제외되는 효자 자산!</p>
+                  <div class="flex items-center bg-green-50 rounded-xl border border-green-200 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition overflow-hidden">
+                    <input type="number" id="taxFree" value="2000" min="0" step="100" class="w-full pl-4 pr-2 py-3 bg-transparent outline-none text-lg font-semibold text-right">
+                    <span class="pr-4 text-gray-500 font-medium whitespace-nowrap">만원</span>
+                  </div>
+                </div>
+                
+                <div>
+                  <label class="block text-sm font-bold text-gray-700 mb-1 break-keep">은퇴 전까지 매월 추가 저축액</label>
+                  <div class="flex items-center bg-gray-50 rounded-xl border border-gray-200 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition overflow-hidden">
+                    <input type="number" id="monthlySave" value="100" min="0" step="10" class="w-full pl-4 pr-2 py-3 bg-transparent outline-none text-lg font-semibold text-right">
+                    <span class="pr-4 text-gray-500 font-medium whitespace-nowrap">만원/월</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 수익률/물가상승률 -->
+            <div>
+              <div class="flex justify-between mb-2">
+                <label class="block text-sm font-bold text-gray-700">투자자산 기대 연 수익률</label>
+                <span class="font-bold text-primary"><span id="returnValue">5.0</span>%</span>
+              </div>
+              <input type="range" id="returnRate" min="1" max="10" step="0.5" value="5.0" oninput="document.getElementById('returnValue').innerText = parseFloat(this.value).toFixed(1)">
+              
+              <div class="flex justify-between mb-2 mt-4">
+                <label class="block text-sm font-bold text-gray-700">예상 물가상승률</label>
+                <span class="font-bold text-orange-500"><span id="inflationValue">2.5</span>%</span>
+              </div>
+              <input type="range" id="inflationRate" min="1" max="5" step="0.1" value="2.5" oninput="document.getElementById('inflationValue').innerText = parseFloat(this.value).toFixed(1)">
+            </div>
+
+            <button onclick="calculateDetailedRetirement()" class="w-full bg-dark text-white py-4 rounded-xl font-bold text-lg hover:bg-black transition shadow-lg mt-4 sticky bottom-0">
+              세금·건보료 차감 결과 확인하기
+            </button>
+          </div>
+        </div>
+        
+        <!-- 결과 패널 -->
+        <div class="lg:w-1/2 bg-gradient-to-br from-gray-900 to-gray-800 p-6 lg:p-8 text-white relative">
+          <!-- Pattern overlay -->
+          <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
           
-          <!-- Empty State -->
-          <div id="result-empty" class="h-full flex flex-col items-center justify-center text-center opacity-80">
-            <div class="text-7xl mb-6">📉</div>
-            <h3 class="text-2xl font-bold mb-3">아직 계산되지 않았습니다.</h3>
-            <p class="text-gray-400">좌측에 정보를 입력하고<br>분석하기 버튼을 눌러주세요.</p>
+          <div class="relative z-10 h-full flex flex-col justify-center" id="result-panel-empty">
+            <div class="text-center">
+              <div class="text-6xl mb-4">🧮</div>
+              <h3 class="text-2xl font-bold mb-2">정밀 진단 결과</h3>
+              <p class="text-gray-400">좌측에 정보를 입력하고 버튼을 눌러주세요.</p>
+            </div>
           </div>
 
-          <!-- Data State -->
-          <div id="result-data" class="hidden flex-col gap-6">
-            <div class="text-center mb-2">
-              <span class="inline-block px-3 py-1 bg-white/10 rounded-full text-xs font-bold text-primary mb-2 border border-primary/30">분석 완료</span>
-              <h3 class="text-2xl font-display font-bold">예상 은퇴 라이프스타일</h3>
-              <p class="text-sm text-gray-400 mt-1" id="res-subtitle">65세 은퇴 시점 기준 (물가상승 반영)</p>
-            </div>
-
-            <!-- 타겟 및 총액 요약 -->
-            <div class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-5 border border-gray-700 shadow-inner">
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-sm text-gray-400">목표 월 생활비 (세후)</span>
-                <span class="text-lg font-bold text-white" id="res-target-need">0만원</span>
-              </div>
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-sm text-gray-400">예상 월 수입 (세후)</span>
-                <span class="text-2xl font-black text-secondary" id="res-net-income">0만원</span>
-              </div>
-              <div class="h-px bg-gray-700 my-3"></div>
-              <div class="flex justify-between items-center">
-                <span class="text-sm font-bold text-gray-300">과부족액</span>
-                <span class="text-xl font-black" id="res-shortfall-monthly">0만원</span>
-              </div>
-            </div>
-
-            <!-- 16.5% 경고 알림 -->
-            <div id="tax-warning" class="hidden bg-red-900/50 border border-red-500 rounded-xl p-4 text-sm text-red-100">
-              <div class="flex items-start gap-2">
-                <span class="text-xl">⚠️</span>
-                <div>
-                  <strong class="text-red-300 block mb-1">사적연금 종합과세 경고!</strong>
-                  사적연금 수령액이 연 1,500만원(월 125만원)을 초과하여 <strong>16.5%의 분리과세(또는 종합소득세)</strong>가 적용되었습니다. 
-                  수령 기간을 늘리거나 비과세 상품으로 포트폴리오 조성이 시급합니다.
-                </div>
-              </div>
-            </div>
-
-            <!-- 상세 내역 아코디언 스타일 -->
-            <div class="space-y-3">
-              <h4 class="text-sm font-bold text-gray-400 border-b border-gray-700 pb-2">월 수입 상세 분석 (Gross → Net)</h4>
+          <div class="relative z-10 hidden flex-col h-full" id="result-panel-data">
+            <h3 class="text-xl font-bold text-gray-300 mb-4 font-display">📊 세금/건보료 반영 진단결과</h3>
+            
+            <div class="space-y-4 flex-grow">
               
-              <!-- 공적연금 -->
-              <div class="bg-white/5 rounded-xl p-4">
-                <div class="flex justify-between mb-1">
-                  <span class="font-bold text-blue-300">🏛️ 공적연금</span>
-                  <span class="font-bold" id="res-gross-pub">0만원</span>
-                </div>
-                <div class="text-xs text-gray-400 flex justify-between mt-2">
-                  <span>↳ 연금소득세 (추정)</span>
-                  <span class="text-red-400" id="res-tax-pub">-0만원</span>
-                </div>
-                <div class="text-xs text-gray-400 flex justify-between mt-1">
-                  <span>↳ 건강/장기요양보험료 (추정)</span>
-                  <span class="text-red-400" id="res-hi-pub">-0만원</span>
-                </div>
-                <div class="text-sm text-gray-300 flex justify-between mt-2 pt-2 border-t border-gray-700/50 font-bold">
-                  <span>실수령액</span>
-                  <span class="text-white" id="res-net-pub">0만원</span>
+              <!-- 목표 vs 실제 -->
+              <div class="bg-white/10 rounded-2xl p-5 backdrop-blur-sm border border-white/10">
+                <p class="text-sm text-gray-400 mb-1">은퇴 시점 필요 월 생활비 (물가상승 반영)</p>
+                <div class="text-2xl font-black text-white" id="res-target-monthly">-</div>
+                
+                <div class="mt-4 pt-4 border-t border-white/10">
+                  <p class="text-sm font-bold text-primary mb-1">준비된 월 예상 실수령액 (세금·건보료 차감 후)</p>
+                  <div class="text-4xl font-black text-primary" id="res-net-monthly">-</div>
                 </div>
               </div>
 
-              <!-- 사적연금 -->
-              <div class="bg-white/5 rounded-xl p-4">
-                <div class="flex justify-between mb-1">
-                  <span class="font-bold text-purple-300">📈 사적/퇴직연금</span>
-                  <span class="font-bold" id="res-gross-priv">0만원</span>
+              <!-- 자산별 수령액 분해 -->
+              <div class="bg-black/30 rounded-2xl p-5 border border-white/5 space-y-3">
+                <h4 class="text-sm font-bold text-gray-300 border-b border-white/10 pb-2 mb-3">연금별 세후 월 수령액 상세 (은퇴기간 분할)</h4>
+                
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-400">공적연금 <span class="text-xs text-red-400">(건보료 차감)</span></span>
+                  <strong class="text-white" id="res-break-public">-</strong>
                 </div>
-                <div class="text-xs text-gray-400 flex justify-between mt-2">
-                  <span>↳ 연금소득세 (<span id="res-priv-tax-rate">0</span>%)</span>
-                  <span class="text-red-400" id="res-tax-priv">-0만원</span>
+                
+                <div class="flex justify-between items-center relative group">
+                  <span class="text-sm text-gray-400">사적연금 <span class="text-xs text-red-400">(연금소득세 차감)</span></span>
+                  <strong class="text-white" id="res-break-private">-</strong>
                 </div>
-                <div class="text-sm text-gray-300 flex justify-between mt-2 pt-2 border-t border-gray-700/50 font-bold">
-                  <span>실수령액</span>
-                  <span class="text-white" id="res-net-priv">0만원</span>
+
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-400">퇴직연금 <span class="text-xs text-red-400">(퇴직소득세 차감)</span></span>
+                  <strong class="text-white" id="res-break-severance">-</strong>
+                </div>
+
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-400">비과세·일반자산 <span class="text-xs text-green-400">(세금 0원)</span></span>
+                  <strong class="text-green-400" id="res-break-taxfree">-</strong>
                 </div>
               </div>
 
-              <!-- 비과세 및 일반자산 -->
-              <div class="bg-white/5 rounded-xl p-4">
-                <div class="flex justify-between mb-1">
-                  <span class="font-bold text-green-300">💵 비과세/일반자산</span>
-                  <span class="font-bold" id="res-gross-free">0만원</span>
+              <!-- 경고 및 처방 -->
+              <div class="bg-white rounded-2xl p-6 text-gray-900 shadow-xl mt-2">
+                <p class="text-sm font-bold text-gray-500 mb-1">매월 부족한 생활비</p>
+                <div class="text-2xl font-black text-red-600 mb-2" id="res-shortfall-monthly">-</div>
+                
+                <!-- 세금 폭탄 경고창 -->
+                <div id="tax-warning" class="hidden mt-3 p-3 bg-red-100 border border-red-300 rounded-lg">
+                  <p class="text-xs text-red-800 font-bold flex items-start gap-1">
+                    <span>⚠️</span>
+                    <span>사적연금 수령액이 연 1,500만원을 초과하여 16.5%의 높은 세율이 적용되었습니다. 비과세 자산으로의 포트폴리오 분산이 시급합니다!</span>
+                  </p>
                 </div>
-                <div class="text-xs text-green-400/80 flex justify-between mt-2">
-                  <span>↳ 세금/건보료 없음 (0%)</span>
-                  <span>-0만원</span>
-                </div>
-                <div class="text-sm text-gray-300 flex justify-between mt-2 pt-2 border-t border-gray-700/50 font-bold">
-                  <span>실수령액</span>
-                  <span class="text-white" id="res-net-free">0만원</span>
+
+                <div id="additional-savings-container" class="mt-4 pt-4 border-t border-gray-100">
+                  <p class="text-xs text-primary font-bold mb-1">💡 목표 달성을 위한 전문가 처방</p>
+                  <p class="text-sm font-medium text-gray-800 leading-relaxed">
+                    지금부터 은퇴 전까지 매월 <strong class="text-lg text-primary font-black" id="res-additional-monthly">-</strong>씩 추가로 저축하셔야 합니다. (비과세 계좌 활용 권장)
+                  </p>
                 </div>
               </div>
+
             </div>
-
-            <!-- 처방전 -->
-            <div id="prescription-box" class="mt-4 bg-primary/20 border border-primary/50 rounded-xl p-5">
-              <h4 class="text-primary font-black mb-2 flex items-center gap-2">
-                <span>💡</span> 안석훈 매니저의 솔루션
-              </h4>
-              <p class="text-sm text-gray-200 leading-relaxed" id="res-prescription-text"></p>
-            </div>
-
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- 달러 비과세 솔루션 -->
   <section id="solution" class="py-24 bg-white relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-6 font-display leading-tight">
-          계산된 세금과 건보료가 부담되시나요?<br>
-          <span class="text-primary">절세 코어 포트폴리오</span>가 정답입니다.
+        <div class="inline-block px-4 py-1.5 rounded-full bg-green-100 text-green-800 font-bold text-sm mb-4">
+          맞춤 솔루션 제안
+        </div>
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-6 font-display leading-tight break-keep">
+          부족한 노후자금,<br>
+          <span class="text-green-600">3대 핵심 절세 상품</span>으로 채우세요.
         </h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto break-keep">
+          단순한 저축을 넘어, 세금은 줄이고 수익은 극대화하는 가장 현명한 노후 준비 포트폴리오를 제안합니다.
+        </p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <!-- 솔루션 1 -->
-        <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-xl transition">
+        <!-- 솔루션 1: 연금저축 & IRP -->
+        <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-xl transition transform hover:-translate-y-2">
           <div class="text-4xl mb-4">🏦</div>
           <h3 class="text-xl font-bold text-gray-900 mb-2">연금저축 & IRP</h3>
-          <p class="text-purple-600 font-bold text-sm mb-4">"연말정산 환급 + 과세이연"</p>
-          <ul class="space-y-3 text-sm text-gray-600 mb-6">
-            <li class="flex items-start"><span class="text-purple-500 mr-2">✓</span>연 최대 900만원 세액공제 (최대 148.5만원 환급)</li>
-            <li class="flex items-start"><span class="text-purple-500 mr-2">✓</span>운용 중 세금 0원, 은퇴 후 3.3~5.5% 저율과세</li>
-            <li class="flex items-start"><span class="text-purple-500 mr-2">✓</span>단, 연 1,500만원 초과 수령 시 종합과세 주의</li>
+          <p class="text-green-600 font-bold text-sm mb-4">"연말정산 환급의 1등 공신"</p>
+          <ul class="space-y-3 text-sm text-gray-600 mb-6 break-keep">
+            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span>연 최대 900만원 세액공제 (최대 148.5만원 환급)</li>
+            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span>운용 수익에 대해 연금 수령 시까지 과세 이연</li>
+            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span>저율 과세 (3.3~5.5%) 연금 수령 가능</li>
           </ul>
         </div>
 
-        <!-- 솔루션 2 -->
-        <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-xl transition">
+        <!-- 솔루션 2: ISA -->
+        <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-xl transition transform hover:-translate-y-2">
           <div class="text-4xl mb-4">📈</div>
           <h3 class="text-xl font-bold text-gray-900 mb-2">중개형 ISA</h3>
-          <p class="text-blue-600 font-bold text-sm mb-4">"만능 투자 절세 통장"</p>
-          <ul class="space-y-3 text-sm text-gray-600 mb-6">
-            <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>순수익 200~400만원 전액 비과세</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>초과분은 9.9% 분리과세로 종소세 회피</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2">✓</span>만기 자금을 연금계좌 이전 시 추가 세액공제</li>
+          <p class="text-green-600 font-bold text-sm mb-4">"만능 투자 통장"</p>
+          <ul class="space-y-3 text-sm text-gray-600 mb-6 break-keep">
+            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span>의무가입 3년 후 순수익 200~400만원 비과세</li>
+            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span>초과분은 9.9% 분리과세 적용</li>
+            <li class="flex items-start"><span class="text-green-500 mr-2">✓</span>만기 자금을 연금계좌 이전 시 추가 세액공제 혜택</li>
           </ul>
         </div>
 
-        <!-- 솔루션 3 -->
-        <div class="bg-red-50 p-8 rounded-3xl border border-red-200 hover:shadow-xl transition relative overflow-hidden">
-          <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 rounded-bl-lg">핵심 추천</div>
+        <!-- 솔루션 3: 달러 비과세 -->
+        <div class="bg-green-50 p-8 rounded-3xl border border-green-200 hover:shadow-xl transition transform hover:-translate-y-2 relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">추천</div>
           <div class="text-4xl mb-4">💵</div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">달러 비과세 연금</h3>
-          <p class="text-red-600 font-bold text-sm mb-4">"건보료 0원, 세금 0원의 마법"</p>
-          <ul class="space-y-3 text-sm text-gray-700 mb-6">
-            <li class="flex items-start"><span class="text-red-500 mr-2">✓</span>미국 S&P500 등 지수 연동으로 안정적 수익 추구</li>
-            <li class="flex items-start"><span class="text-red-500 mr-2">✓</span>10년 유지 시 이자소득세(15.4%) 전액 면제</li>
-            <li class="flex items-start"><span class="text-red-500 mr-2 font-bold">✓</span>비과세 소득으로 잡혀 건보료 인상에 전혀 영향 없음</li>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">미국 지수 달러비과세</h3>
+          <p class="text-green-700 font-bold text-sm mb-4">"건보료·세금 0원 플랜"</p>
+          <ul class="space-y-3 text-sm text-gray-700 mb-6 break-keep">
+            <li class="flex items-start"><span class="text-green-600 mr-2">✓</span>미국 S&P500(VOO), 나스닥(QQQ) 지수 연동 투자</li>
+            <li class="flex items-start"><span class="text-green-600 mr-2">✓</span>10년 유지 시 <strong class="ml-1 text-red-500">수익 전액 비과세 (건보료 산정 제외)</strong></li>
+            <li class="flex items-start"><span class="text-green-600 mr-2">✓</span>기축통화 달러 자산 확보로 환율 상승 시 환차익 기대</li>
           </ul>
         </div>
       </div>
@@ -566,37 +492,47 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <h2 class="text-3xl md:text-5xl font-black mb-6 font-display break-keep">당신의 성공적인 인생 2막,<br>전문가와 함께 설계하세요.</h2>
       <p class="text-lg md:text-xl text-gray-300 mb-12 break-keep">
-        개인의 자산 현황과 목표에 맞춘 1:1 프리미엄 포트폴리오를 제안해 드립니다.
+        세금과 건강보험료까지 철저하게 분석한 1:1 프리미엄 포트폴리오를 무료로 제안해 드립니다.
       </p>
       
-      <div class="bg-white/10 p-6 md:p-8 rounded-3xl backdrop-blur-md inline-block border border-white/20 w-full max-w-lg mx-auto">
-        <p class="text-primary font-bold mb-2">KB스타웰스매니저 안석훈</p>
+      <div class="bg-white/10 p-8 rounded-3xl backdrop-blur-md inline-block border border-white/20 w-full max-w-lg mx-auto">
+        <p class="text-primary font-bold mb-4">KB스타웰스매니저 안석훈</p>
         
-        <div class="flex flex-col gap-4 mt-6">
-          <a href="tel:010-2213-3907" class="bg-white/5 border border-white/10 text-2xl md:text-3xl font-black text-white py-4 rounded-xl hover:bg-white/10 hover:text-primary transition flex items-center justify-center gap-3 w-full tracking-wider">
-            <span>☎</span> 010-2213-3907
+        <div class="flex flex-col gap-4 w-full">
+          <!-- 전화 연결 버튼 -->
+          <a href="tel:010-2213-3907" class="w-full bg-white text-dark py-4 rounded-xl font-black text-xl hover:bg-gray-100 transition shadow flex items-center justify-center gap-2">
+            <span>📞</span> 010-2213-3907
           </a>
           
-          <a href="https://booking.allbaro.workers.dev" target="_blank" rel="noopener noreferrer" class="bg-primary text-white py-4 rounded-xl font-bold text-lg md:text-xl hover:bg-red-500 transition shadow-lg flex items-center justify-center gap-2 w-full">
-            📅 상담 예약하기
+          <!-- 상담 예약 링크 버튼 -->
+          <a href="https://booking.allbaro.workers.dev" target="_blank" class="w-full bg-primary text-white py-4 rounded-xl font-black text-xl hover:bg-red-600 transition shadow-lg flex items-center justify-center gap-2">
+            <span>🗓️</span> 상담 예약하기
           </a>
         </div>
         
         <p class="text-gray-400 text-sm mt-6 break-keep">
-          편하신 방법으로 문의 남겨주시면, 친절하게 안내해 드리겠습니다.
+          원하시는 방법을 선택해 부담 없이 문의 남겨주세요.
         </p>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-400 py-10 text-center text-sm border-t border-gray-800">
+  <footer class="bg-gray-900 text-gray-400 py-12 text-center text-sm border-t border-gray-800">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="mb-4">※ 본 계산기는 세법(2024년 기준 추정) 및 가정에 기반한 시뮬레이션으로 실제 결과와 다를 수 있습니다.</p>
-      <p>&copy; 2026 Retirement Planning by 안석훈.</p>
+      <div class="font-display text-2xl text-white mb-4">🌴 인생 2막 노후설계소</div>
+      <p class="mb-2">안석훈 KB스타웰스매니저 | 연락처: 010-2213-3907</p>
+      <p class="mb-6 break-keep">※ 본 웹사이트는 가상의 데이터를 기반으로 한 노후자금 시뮬레이션을 제공하며, 실제 상품 가입 및 관련 세법 요건 충족 여부에 따라 결과가 다를 수 있습니다.</p>
+      <p>&copy; 2026 Retirement Planning. 행복한 인생 2막을 응원합니다 ✨</p>
     </div>
   </footer>
 
+  <!-- 플로팅 전화 버튼 -->
+  <a href="tel:010-2213-3907" class="float-btn fixed bottom-6 right-6 w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-3xl shadow-2xl hover:bg-red-600 transition z-50 border-4 border-white" title="전화 상담">
+    📞
+  </a>
+
+  <!-- JavaScript -->
   <script>
     // 네비게이션 스크롤 효과
     window.addEventListener('scroll', () => {
@@ -609,235 +545,207 @@
       }
     });
 
+    // 모바일 메뉴 토글
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
-    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
 
-    // 숫자 포맷팅 (만원 단위 -> 한글 표기)
-    function formatMoney(amountInManwon) {
-      if (amountInManwon === 0) return '0원';
-      const isNegative = amountInManwon < 0;
-      const absAmount = Math.abs(Math.round(amountInManwon));
+    // --- 무료 진단 퀴즈 로직 ---
+    let quizScore = 0;
+    function nextQuiz(currentStep, score) {
+      quizScore += score;
+      document.getElementById(`step-${currentStep}`).classList.add('hidden');
+      document.getElementById(`step-${currentStep + 1}`).classList.remove('hidden');
+    }
+    
+    function finishQuiz(currentStep, score) {
+      quizScore += score;
+      document.getElementById(`step-${currentStep}`).classList.add('hidden');
+      document.getElementById(`quiz-result`).classList.remove('hidden');
       
-      const uk = Math.floor(absAmount / 10000);
-      const man = Math.floor(absAmount % 10000);
+      const resultText = document.getElementById('result-text');
+      if (quizScore >= 40) {
+        resultText.innerText = "훌륭합니다! 노후 준비의 기초가 탄탄하시네요.";
+        resultText.className = "text-xl text-green-600 font-bold mb-6";
+      } else if (quizScore >= 20) {
+        resultText.innerText = "시작이 반입니다! 지금부터 구체적인 계획이 필요합니다.";
+        resultText.className = "text-xl text-orange-500 font-bold mb-6";
+      } else {
+        resultText.innerText = "경고! 당장 전문가와 함께 노후 점검이 시급합니다.";
+        resultText.className = "text-xl text-red-600 font-bold mb-6";
+      }
+    }
+
+    // --- 금액 포맷터 (한국어 만원 단위) ---
+    function formatKoreanCurrency(amountInManwon) {
+      if (amountInManwon <= 0) return '0원';
+      
+      // 소수점 이하는 버림 처리하여 깔끔하게 표시
+      const floorAmount = Math.floor(amountInManwon); 
+      
+      const uk = Math.floor(floorAmount / 10000);
+      const man = Math.floor(floorAmount % 10000);
+      
       let result = '';
       if (uk > 0) result += uk.toLocaleString() + '억 ';
       if (man > 0) result += man.toLocaleString() + '만';
       
-      return (isNegative ? '-' : '') + result.trim() + '원';
+      return result.trim() + '원';
     }
 
-    // 미래가치(FV) 계산 - 매월 복리 적용
-    function getFutureValue(pv, pmt, annualRate, years) {
-      let r = annualRate / 100;
-      let n = years;
-      
-      if (r === 0) return pv + (pmt * 12 * years);
-
-      // 월 단위 복리 계산
-      let rm = r / 12;
-      let nm = years * 12;
-      
-      let fv_pv = pv * Math.pow(1 + rm, nm);
-      let fv_pmt = pmt * ((Math.pow(1 + rm, nm) - 1) / rm) * (1 + rm); // 기초불 가정(월초납입)
-      
-      return fv_pv + fv_pmt;
-    }
-
-    // 연금 수령액 (PMT) 계산 (고갈 가정)
-    function getMonthlyPayout(fv, annualRate, payoutYears) {
-      let r = annualRate / 100;
-      if (payoutYears <= 0) return fv;
-      
-      let rm = r / 12;
-      let nm = payoutYears * 12;
-      
-      if (rm === 0) return fv / nm;
-      
-      // PV = PMT * (1 - (1+r)^-n) / r  => PMT = PV * r / (1 - (1+r)^-n)
-      return (fv * rm) / (1 - Math.pow(1 + rm, -nm));
-    }
-
-    // 공적연금 세금 계산 (간이 연금소득공제 적용)
-    function calculatePublicPensionTax(annualGross) {
-      // 1. 연금소득공제
-      let deduction = 0;
-      if (annualGross <= 350) deduction = annualGross;
-      else if (annualGross <= 700) deduction = 350 + (annualGross - 350) * 0.4;
-      else if (annualGross <= 1400) deduction = 490 + (annualGross - 700) * 0.2;
-      else deduction = 630 + (annualGross - 1400) * 0.1;
-      
-      if (deduction > 900) deduction = 900; // 최대 한도
-
-      let taxableIncome = annualGross - deduction;
-      if (taxableIncome < 0) taxableIncome = 0;
-
-      // 2. 기본세율 (종합소득세율 최하구간 6.6% 지방소득세 포함 가정)
-      // 정확히는 인적공제 등이 들어가지만 보수적으로 6.6% 일괄 적용
-      return taxableIncome * 0.066;
-    }
-
-    function calculateRetirement() {
-      const errBox = document.getElementById('error-message');
-      errBox.classList.add('hidden');
-
+    // --- 정밀 노후 자금 계산 로직 (세금/건보료 반영) ---
+    function calculateDetailedRetirement() {
       // 1. 입력값 가져오기
-      const currentAge = parseInt(document.getElementById('currentAge').value);
-      const retireAge = parseInt(document.getElementById('retireAge').value);
-      const lifeExpectancy = parseInt(document.getElementById('lifeExpectancy').value);
-      const monthlyNeedPV = parseInt(document.getElementById('monthlyNeed').value); // 현재가치
+      const currentAge = parseInt(document.getElementById('currentAge').value) || 0;
+      const retireAge = parseInt(document.getElementById('retireAge').value) || 0;
+      const lifeExpectancy = parseInt(document.getElementById('lifeExpectancy').value) || 0;
       
+      const monthlyNeed = parseFloat(document.getElementById('monthlyNeed').value) || 0; 
+      
+      const publicPensionAmt = parseFloat(document.getElementById('publicPension').value) || 0; 
+      const privatePensionTotal = parseFloat(document.getElementById('privatePension').value) || 0;
+      const severanceTotal = parseFloat(document.getElementById('severance').value) || 0;
+      const taxFreeTotal = parseFloat(document.getElementById('taxFree').value) || 0;
+      const monthlySave = parseFloat(document.getElementById('monthlySave').value) || 0;
+      
+      const returnRate = parseFloat(document.getElementById('returnRate').value) / 100;
+      const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+
+      // 예외 처리
       if (retireAge <= currentAge) {
-        errBox.innerText = "은퇴 희망 나이는 현재 나이보다 커야 합니다.";
-        errBox.classList.remove('hidden');
+        alert("은퇴 희망 나이는 현재 나이보다 커야 합니다.");
         return;
       }
       if (lifeExpectancy <= retireAge) {
-        errBox.innerText = "기대 수명은 은퇴 나이보다 커야 합니다.";
-        errBox.classList.remove('hidden');
+        alert("기대 수명은 은퇴 나이보다 커야 합니다.");
         return;
       }
 
       const yearsToRetire = retireAge - currentAge;
-      const payoutYears = lifeExpectancy - retireAge;
+      const yearsInRetirement = lifeExpectancy - retireAge;
 
-      // 수익률/물가
-      const investReturn = parseFloat(document.getElementById('investReturn').value);
-      const safeReturn = parseFloat(document.getElementById('safeReturn').value);
-      const inflation = parseFloat(document.getElementById('inflationRate').value);
+      // 2. 필요 생활비 미래 가치 산출
+      const futureMonthlyNeed = monthlyNeed * Math.pow(1 + inflationRate, yearsToRetire);
 
-      // 목표액 인플레이션 반영 (은퇴 시점 가치)
-      const futureMonthlyNeed = monthlyNeedPV * Math.pow(1 + inflation/100, yearsToRetire);
-
-      // ==========================================
-      // [그룹 1] 공적연금 (인플레이션 헷지 자산으로 간주)
-      // ==========================================
-      const publicPV = parseInt(document.getElementById('publicPensionAmount').value);
-      // 공적연금은 물가상승률만큼 수령액이 증가하므로 은퇴시점 가치로 환산
-      let publicGrossMonthly = publicPV * Math.pow(1 + inflation/100, yearsToRetire);
-      let publicGrossAnnual = publicGrossMonthly * 12;
-
-      // 세금 및 건보료 계산 (공적연금)
-      let publicTaxAnnual = calculatePublicPensionTax(publicGrossAnnual);
+      // 3. 자산별 은퇴 시점 미래 가치 계산 (일시금 기준)
+      const fvPrivate = privatePensionTotal * Math.pow(1 + returnRate, yearsToRetire);
+      const fvSeverance = severanceTotal * Math.pow(1 + returnRate, yearsToRetire);
+      const fvTaxFree = taxFreeTotal * Math.pow(1 + returnRate, yearsToRetire);
       
-      // 건보료: 소득의 50% 인정, 요율 약 8% (장기요양 포함)
-      let healthInsBaseAnnual = publicGrossAnnual * 0.5;
-      let healthInsAnnual = healthInsBaseAnnual * 0.08; 
-      
-      let publicNetAnnual = publicGrossAnnual - publicTaxAnnual - healthInsAnnual;
-      let publicNetMonthly = publicNetAnnual / 12;
-
-      // ==========================================
-      // [그룹 2] 사적연금 (IRP, 연금저축, 퇴직연금)
-      // ==========================================
-      const irpPV = parseInt(document.getElementById('irpAsset').value);
-      const irpPmt = parseInt(document.getElementById('irpMonthly').value);
-      const savePV = parseInt(document.getElementById('savingsAsset').value);
-      const savePmt = parseInt(document.getElementById('savingsMonthly').value);
-      const retPay = parseInt(document.getElementById('retirementPay').value); // 은퇴시점 금액이라 가정
-
-      let fvIRP = getFutureValue(irpPV, irpPmt, investReturn, yearsToRetire);
-      let fvSave = getFutureValue(savePV, savePmt, investReturn, yearsToRetire);
-      
-      let totalPrivAssetFV = fvIRP + fvSave + retPay;
-      // 은퇴 후에도 safeReturn 으로 운용하며 인출한다고 가정
-      let privGrossMonthly = getMonthlyPayout(totalPrivAssetFV, safeReturn, payoutYears);
-      let privGrossAnnual = privGrossMonthly * 12;
-
-      // 세금 계산 (사적연금)
-      let privTaxRate = 0;
-      let isOver15M = false;
-      if (privGrossAnnual > 1500) { // 연 1500만원 초과
-        privTaxRate = 0.165; // 16.5% 분리과세 적용
-        isOver15M = true;
+      // 추가 저축액의 미래 가치 (매월 저축을 연 복리로 근사 계산)
+      const annualSave = monthlySave * 12;
+      let fvSavings = 0;
+      if (returnRate > 0) {
+        fvSavings = annualSave * ((Math.pow(1 + returnRate, yearsToRetire) - 1) / returnRate);
       } else {
-        // 나이에 따른 분리과세율
-        if (retireAge < 70) privTaxRate = 0.055;
-        else if (retireAge < 80) privTaxRate = 0.044;
-        else privTaxRate = 0.033;
+        fvSavings = annualSave * yearsToRetire;
+      }
+      // 추가 저축은 비과세/일반 자산으로 간주하여 taxFree 그룹에 합산
+      const totalFvTaxFree = fvTaxFree + fvSavings; 
+
+      // 4. 은퇴 후 연금 수령액 산출 (보수적으로 은퇴 후 수익률 0% 원금 소진 가정)
+      const monthsInRetirement = yearsInRetirement * 12;
+      
+      const monthlyGrossPrivate = fvPrivate / monthsInRetirement;
+      const monthlyGrossSeverance = fvSeverance / monthsInRetirement;
+      const monthlyGrossTaxFree = totalFvTaxFree / monthsInRetirement;
+      
+      // 공적연금은 현재가치 그대로 수령한다고 보수적 가정 (물가상승 반영되나 계산 단순화)
+      const monthlyGrossPublic = publicPensionAmt;
+
+      // 5. 세금 및 건강보험료 차감 (핵심 로직)
+      
+      // (1) 공적연금 건강보험료 차감
+      // 보수적 기준: 연금액의 50%를 소득으로 인정 후, 약 8%대(건보+장기요양) 부과
+      const healthInsRate = 0.0854; 
+      const monthlyHealthIns = (monthlyGrossPublic * 0.5) * healthInsRate;
+      const netPublic = monthlyGrossPublic - monthlyHealthIns;
+
+      // (2) 사적연금(IRP/연금저축) 세금 차감
+      let privateTaxRate = 0;
+      if (retireAge >= 80) privateTaxRate = 0.033;
+      else if (retireAge >= 70) privateTaxRate = 0.044;
+      else privateTaxRate = 0.055;
+
+      const yearlyGrossPrivate = monthlyGrossPrivate * 12;
+      let isTaxBomb = false;
+      
+      // 사적연금 연 1500만원 초과 시 16.5% 분리과세 적용
+      if (yearlyGrossPrivate > 1500) {
+        privateTaxRate = 0.165;
+        isTaxBomb = true;
       }
       
-      let privTaxAnnual = privGrossAnnual * privTaxRate;
-      let privNetAnnual = privGrossAnnual - privTaxAnnual;
-      let privNetMonthly = privNetAnnual / 12;
+      const monthlyPrivateTax = monthlyGrossPrivate * privateTaxRate;
+      const netPrivate = monthlyGrossPrivate - monthlyPrivateTax;
 
-      // ==========================================
-      // [그룹 3] 비과세 및 일반자산
-      // ==========================================
-      const tfPV = parseInt(document.getElementById('taxfreeAsset').value);
-      const tfPmt = parseInt(document.getElementById('taxfreeMonthly').value);
-      const genPV = parseInt(document.getElementById('generalAsset').value);
+      // (3) 퇴직연금 세금 차감
+      // 퇴직소득세는 별도 계산이나, 연금수령 시 할인 적용되어 보수적으로 3.3%~5.5% 적용
+      let severanceTaxRate = retireAge >= 80 ? 0.033 : (retireAge >= 70 ? 0.044 : 0.055);
+      const netSeverance = monthlyGrossSeverance * (1 - severanceTaxRate);
 
-      let fvTF = getFutureValue(tfPV, tfPmt, investReturn, yearsToRetire);
-      let fvGen = getFutureValue(genPV, 0, safeReturn, yearsToRetire); // 일반자산은 보수적 운용 가정
+      // (4) 비과세 자산
+      const netTaxFree = monthlyGrossTaxFree; // 세금 0
 
-      let totalFreeAssetFV = fvTF + fvGen;
-      // 일반자산의 이자소득세는 원금과 섞여있어 단순화 (여기선 비과세+세후일반자산으로 묶어 0% 처리)
-      let freeNetMonthly = getMonthlyPayout(totalFreeAssetFV, safeReturn, payoutYears);
+      // 총 실수령액
+      const totalNetMonthly = netPublic + netPrivate + netSeverance + netTaxFree;
+      const shortfallMonthly = futureMonthlyNeed - totalNetMonthly;
 
-      // ==========================================
-      // 최종 합산 및 UI 업데이트
-      // ==========================================
-      let totalNetMonthly = publicNetMonthly + privNetMonthly + freeNetMonthly;
-      let shortfall = futureMonthlyNeed - totalNetMonthly;
+      // 6. UI 업데이트
+      document.getElementById('result-panel-empty').classList.add('hidden');
+      document.getElementById('result-panel-data').classList.remove('hidden');
+      document.getElementById('result-panel-data').classList.add('flex');
 
-      // UI 요소 매핑
-      document.getElementById('result-empty').classList.add('hidden');
-      document.getElementById('result-data').classList.remove('hidden');
-      document.getElementById('result-data').classList.add('flex');
+      document.getElementById('res-target-monthly').innerText = formatKoreanCurrency(futureMonthlyNeed);
+      document.getElementById('res-net-monthly').innerText = formatKoreanCurrency(totalNetMonthly);
 
-      document.getElementById('res-subtitle').innerText = `${retireAge}세 은퇴 시점 기준 (물가상승 반영)`;
-      document.getElementById('res-target-need').innerText = formatMoney(futureMonthlyNeed);
-      document.getElementById('res-net-income').innerText = formatMoney(totalNetMonthly);
+      document.getElementById('res-break-public').innerText = formatKoreanCurrency(netPublic);
+      document.getElementById('res-break-private').innerText = formatKoreanCurrency(netPrivate);
+      document.getElementById('res-break-severance').innerText = formatKoreanCurrency(netSeverance);
+      document.getElementById('res-break-taxfree').innerText = formatKoreanCurrency(netTaxFree);
 
       const shortfallEl = document.getElementById('res-shortfall-monthly');
-      const presBox = document.getElementById('res-prescription-text');
+      const additionalContainer = document.getElementById('additional-savings-container');
+      const additionalMonthlyEl = document.getElementById('res-additional-monthly');
+      const taxWarning = document.getElementById('tax-warning');
 
-      if (shortfall > 0) {
-        shortfallEl.innerText = formatMoney(shortfall) + " 부족";
-        shortfallEl.className = "text-xl font-black text-primary";
-        presBox.innerHTML = `은퇴 후 매월 <strong>${formatMoney(shortfall)}</strong>이 부족합니다.<br>
-          특히 사적연금 의존도가 높을 경우 세금 폭탄의 위험이 있으므로, 부족분은 <strong>건보료와 세금이 전혀 없는 '달러 비과세 상품'</strong>으로 채우는 포트폴리오 재조정이 반드시 필요합니다.`;
+      // 세금 폭탄 경고창 표시 여부
+      if (isTaxBomb) {
+        taxWarning.classList.remove('hidden');
       } else {
-        shortfallEl.innerText = formatMoney(Math.abs(shortfall)) + " 초과 달성";
-        shortfallEl.className = "text-xl font-black text-secondary";
-        presBox.innerHTML = `축하합니다! 목표 생활비를 달성하셨습니다.<br>
-          다만 자산의 구조(세금/건보료 비중)를 점검하여, <strong>새어나가는 세금을 막고 실수령액을 극대화</strong>하는 비과세 중심의 리모델링을 권장합니다.`;
+        taxWarning.classList.add('hidden');
       }
 
-      // 16.5% 경고창
-      const warningEl = document.getElementById('tax-warning');
-      if (isOver15M) {
-        warningEl.classList.remove('hidden');
-        document.getElementById('res-priv-tax-rate').innerText = "16.5";
-        document.getElementById('res-tax-priv').className = "text-primary font-bold";
+      if (shortfallMonthly > 0) {
+        shortfallEl.innerText = formatKoreanCurrency(shortfallMonthly) + " 부족";
+        shortfallEl.className = "text-2xl font-black text-red-600 mb-2";
+        
+        // 추가로 필요한 일시금(은퇴시점)
+        const totalShortfallFV = shortfallMonthly * monthsInRetirement;
+        
+        // 이를 달성하기 위한 현재부터의 월 저축액 역산
+        let additionalAnnual = 0;
+        if (returnRate > 0) {
+          additionalAnnual = totalShortfallFV * (returnRate / (Math.pow(1 + returnRate, yearsToRetire) - 1));
+        } else {
+          additionalAnnual = totalShortfallFV / yearsToRetire;
+        }
+        
+        const additionalMonthly = Math.ceil(additionalAnnual / 12);
+        
+        additionalMonthlyEl.innerText = formatKoreanCurrency(additionalMonthly);
+        additionalContainer.classList.remove('hidden');
       } else {
-        warningEl.classList.add('hidden');
-        document.getElementById('res-priv-tax-rate').innerText = (privTaxRate * 100).toFixed(1);
-        document.getElementById('res-tax-priv').className = "text-red-400";
-      }
-
-      // 공적연금
-      document.getElementById('res-gross-pub').innerText = formatMoney(publicGrossMonthly);
-      document.getElementById('res-tax-pub').innerText = "-" + formatMoney(publicTaxAnnual / 12);
-      document.getElementById('res-hi-pub').innerText = "-" + formatMoney(healthInsAnnual / 12);
-      document.getElementById('res-net-pub').innerText = formatMoney(publicNetMonthly);
-
-      // 사적연금
-      document.getElementById('res-gross-priv').innerText = formatMoney(privGrossMonthly);
-      document.getElementById('res-tax-priv').innerText = "-" + formatMoney(privTaxAnnual / 12);
-      document.getElementById('res-net-priv').innerText = formatMoney(privNetMonthly);
-
-      // 비과세
-      document.getElementById('res-gross-free').innerText = formatMoney(freeNetMonthly);
-      document.getElementById('res-net-free').innerText = formatMoney(freeNetMonthly);
-      
-      // 모바일에서 결과창으로 자동 스크롤
-      if(window.innerWidth < 1024) {
-        document.getElementById('result-data').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        shortfallEl.innerText = formatKoreanCurrency(Math.abs(shortfallMonthly)) + " 초과 달성!";
+        shortfallEl.className = "text-2xl font-black text-green-400 mb-2";
+        additionalContainer.classList.add('hidden');
       }
     }
   </script>
 </body>
 </html>
+
+
+```
