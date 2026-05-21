@@ -38,6 +38,23 @@
     body { font-family: 'Noto Sans KR', sans-serif; }
     .font-display { font-family: 'Jua', sans-serif; }
     
+    /* 입력창 숫자 스피너(화살표) 숨김 및 단위 텍스트 겹침 방지 */
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    .input-group .relative input {
+      padding-right: 4rem !important; /* '만원' 텍스트와 겹치지 않도록 우측 여백 확보 */
+    }
+    .input-group .relative span {
+      top: 50% !important;
+      transform: translateY(-50%);
+    }
+    
     /* Range Slider Styling */
     input[type=range] {
       -webkit-appearance: none;
